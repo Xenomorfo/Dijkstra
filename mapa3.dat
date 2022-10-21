@@ -1,0 +1,24 @@
+8
+1, Entrada
+2, Pirata
+3, Russa
+4, Tropical
+5, Magico
+6, Mouro
+7, Selvagem
+8, Spa
+14
+1, caminho, alameda, 1, 2, true, 120, 250
+2, caminho, quinta, 3, 6, false, 15, 10
+3, caminho, rosas, 5, 8, true, 10, 20
+4, caminho, florido, 2, 5, true, 10, 100
+5, ponte, silvestre, 2, 6, false, 20, 200
+6, caminho, direita, 7, 6, true, 25, 180
+7, ponte, escuro, 3, 7, true, 30, 450
+8, caminho, ruidoso, 8, 7, true, 25, 250
+9, caminho, melodia, 1, 8, true, 25, 150
+10, ponte, meio_parque, 3, 4, false, 155, 200
+11, caminho, passeio, 7, 1, true, 23, 200
+12, ponte, bungalows, 3, 2, true, 30, 350
+13, caminho, nososhort, 2, 4, true, 5, 50
+14, caminho, shortway, 5, 1, true, 2, 10

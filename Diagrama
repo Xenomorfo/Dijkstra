@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="160221071_ProjectPA1">
+  <ClassDiagramComponents>
+    <Class name="TicketPDF" package="Template" visibility="public" xPosition="1687.0" yPosition="1935.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Tickets" name="ticket"/>
+          <Argument type="String" name="bikeOrNot"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="saveToPdf" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="InvoicePDF" package="Template" visibility="public" xPosition="160.0" yPosition="674.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Tickets" name="ticket"/>
+          <Argument type="String" name="bikeOrNot"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="saveToPdf" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="TicketInvoice" package="Template" visibility="public" isAbstract="true" xPosition="1532.0" yPosition="1018.0">
+      <Fields>
+        <Field name="date" type="Date" visibility="protected"/>
+        <Field name="ticket" type="Tickets" visibility="protected"/>
+        <Field name="bikeOrNot" type="String" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Tickets" name="ticket"/>
+          <Argument type="String" name="bikeOrNot"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="saveToPdf" returnType="void" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Class>
+    <Class name="CareTaker" package="Memento" visibility="public" xPosition="182.0" yPosition="318.0">
+      <Fields>
+        <Field name="objMementos" type="Stack&lt;Memento&gt;" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="saveState" returnType="void" visibility="public">
+          <Argument type="PathInfo" name="pathInfo"/>
+        </Method>
+        <Method name="restoreState" returnType="void" visibility="public">
+          <Argument type="PathInfo" name="pathInfo"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Memento" package="Memento" visibility="public" xPosition="547.0" yPosition="194.0">
+      <Fields>
+        <Field name="oldPath" type="List&lt;Integer&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getPath" returnType="List&lt;Integer&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PathInfo" package="Memento" visibility="public" xPosition="1309.0" yPosition="1510.0">
+      <Fields>
+        <Field name="path" type="List&lt;Integer&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="createMemento" returnType="Memento" visibility="public"/>
+        <Method name="setMemento" returnType="void" visibility="public">
+          <Argument type="Memento" name="memento"/>
+        </Method>
+        <Method name="getPath" returnType="List&lt;Integer&gt;" visibility="public"/>
+        <Method name="setPath" returnType="void" visibility="public">
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PersistDAOMySql" package="PersistDAO" visibility="public" xPosition="883.0" yPosition="19.0">
+      <Fields>
+        <Field name="DATABASE" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="con" type="Connection" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="url"/>
+          <Argument type="String" name="db_user"/>
+          <Argument type="String" name="db_pass"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="selectTickets" returnType="Collection&lt;Tickets&gt;" visibility="public"/>
+        <Method name="selectStats" returnType="Collection&lt;Statistics&gt;" visibility="public"/>
+        <Method name="insert" returnType="void" visibility="public">
+          <Argument type="Tickets" name="ticket"/>
+          <Argument type="Statistics" name="statistics"/>
+        </Method>
+        <Method name="querySqlTickets" returnType="HashSet&lt;Tickets&gt;" visibility="private">
+          <Argument type="String" name="sql"/>
+        </Method>
+        <Method name="querySqlStats" returnType="HashSet&lt;Statistics&gt;" visibility="private">
+          <Argument type="String" name="sql"/>
+        </Method>
+        <Method name="updateSQL" returnType="boolean" visibility="private">
+          <Argument type="String" name="sql"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PersistDAOFile" package="PersistDAO" visibility="public" xPosition="1581.0" yPosition="742.0">
+      <Fields>
+        <Field name="tickets" type="HashSet&lt;Tickets&gt;" visibility="private"/>
+        <Field name="stats" type="HashSet&lt;Statistics&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="selectTickets" returnType="Collection&lt;Tickets&gt;" visibility="public"/>
+        <Method name="selectStats" returnType="Collection&lt;Statistics&gt;" visibility="public"/>
+        <Method name="insert" returnType="void" visibility="public">
+          <Argument type="Tickets" name="ticket"/>
+          <Argument type="Statistics" name="statistics"/>
+        </Method>
+        <Method name="saveAll" returnType="void" visibility="private"/>
+        <Method name="loadAll" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="Statistics" package="Manager" visibility="public" xPosition="598.0" yPosition="1805.0">
+      <Fields>
+        <Field name="sumOfCosts" type="double" visibility="private"/>
+        <Field name="footTicket" type="int" visibility="private"/>
+        <Field name="bikeTicket" type="int" visibility="private"/>
+        <Field name="cheaper" type="int" visibility="private"/>
+        <Field name="faster" type="int" visibility="private"/>
+        <Field name="map" type="Map&lt;String, Integer&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="double" name="sumOfCosts"/>
+          <Argument type="int" name="footTicket"/>
+          <Argument type="int" name="bikeTicket"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="addStats" returnType="void" visibility="public">
+          <Argument type="boolean" name="isCheap"/>
+          <Argument type="boolean" name="isBike"/>
+          <Argument type="int" name="qty_tickets"/>
+          <Argument type="double" name="cost"/>
+        </Method>
+        <Method name="getMidPrice" returnType="double" visibility="public"/>
+        <Method name="getPercentage" returnType="int" visibility="public">
+          <Argument type="int" name="toCalc"/>
+        </Method>
+        <Method name="getFootTicket" returnType="int" visibility="public"/>
+        <Method name="getBikeTicket" returnType="int" visibility="public"/>
+        <Method name="getSumOfCosts" returnType="double" visibility="public"/>
+        <Method name="setFootTicket" returnType="void" visibility="public">
+          <Argument type="int" name="footTicket"/>
+        </Method>
+        <Method name="setBikeTicket" returnType="void" visibility="public">
+          <Argument type="int" name="bikeTicket"/>
+        </Method>
+        <Method name="setSumOfCosts" returnType="void" visibility="public">
+          <Argument type="double" name="sumOfCosts"/>
+        </Method>
+        <Method name="getCheaper" returnType="int" visibility="public"/>
+        <Method name="getFaster" returnType="int" visibility="public"/>
+        <Method name="setFaster" returnType="void" visibility="public">
+          <Argument type="int" name="faster"/>
+        </Method>
+        <Method name="setCheaper" returnType="void" visibility="public">
+          <Argument type="int" name="cheaper"/>
+        </Method>
+        <Method name="getMap" returnType="Map&lt;String, Integer&gt;" visibility="public"/>
+        <Method name="setMap" returnType="void" visibility="public">
+          <Argument type="Map&lt;String, Integer&gt;" name="map"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PathManager" package="Manager" visibility="public" isFinal="true" xPosition="1364.0" yPosition="425.0">
+      <Fields>
+        <Field name="graph" type="WeightedGraph&lt;Local, Path&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="readFile" returnType="WeightedGraph" visibility="public"/>
+        <Method name="checkLocalId" returnType="Vertex&lt;Local&gt;" visibility="public">
+          <Argument type="int" name="position"/>
+        </Method>
+        <Method name="checkLocalName" returnType="Vertex&lt;Local&gt;" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="addLocal" returnType="void" visibility="public">
+          <Argument type="Local" name="local"/>
+        </Method>
+        <Method name="addPath" returnType="void" visibility="public">
+          <Argument type="int" name="origin"/>
+          <Argument type="int" name="destination"/>
+          <Argument type="Path" name="path"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Tickets" package="Manager" visibility="public" xPosition="1364.0" yPosition="2140.0">
+      <Fields>
+        <Field name="nif" type="int" visibility="private" isFinal="true"/>
+        <Field name="date" type="Date" visibility="private" isFinal="true"/>
+        <Field name="qty_tickets" type="int" visibility="private" isFinal="true"/>
+        <Field name="info" type="String" visibility="private" isFinal="true"/>
+        <Field name="cost" type="double" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="nif"/>
+          <Argument type="int" name="qty_tickets"/>
+          <Argument type="double" name="cost"/>
+          <Argument type="String" name="info"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNif" returnType="int" visibility="public"/>
+        <Method name="getDate" returnType="Date" visibility="public"/>
+        <Method name="getQty_tickets" returnType="int" visibility="public"/>
+        <Method name="getInfo" returnType="String" visibility="public"/>
+        <Method name="getCost" returnType="double" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Local" package="Manager" visibility="public" xPosition="900.0" yPosition="280.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private" isFinal="true"/>
+        <Field name="localId" type="int" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="localId"/>
+          <Argument type="String" name="nome"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="getLocalId" returnType="int" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Path" package="Manager" visibility="public" xPosition="100.0" yPosition="1000.0">
+      <Fields>
+        <Field name="pathId" type="int" visibility="private"/>
+        <Field name="type" type="String" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="crossable" type="boolean" visibility="private"/>
+        <Field name="cost" type="double" visibility="private"/>
+        <Field name="distance" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="pathId"/>
+          <Argument type="String" name="type"/>
+          <Argument type="String" name="name"/>
+          <Argument type="boolean" name="crossable"/>
+          <Argument type="double" name="cost"/>
+          <Argument type="double" name="distance"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCost" returnType="double" visibility="public"/>
+        <Method name="getDistance" returnType="double" visibility="public"/>
+        <Method name="getPathId" returnType="int" visibility="public"/>
+        <Method name="getType" returnType="String" visibility="public"/>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="isCrossable" returnType="boolean" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DijkstraContext" package="Dijkstra" visibility="public" xPosition="1426.0" yPosition="19.0">
+      <Fields>
+        <Field name="strategy" type="DijkstraStrategy" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="setStrategy" returnType="void" visibility="public">
+          <Argument type="DijkstraStrategy" name="strategy"/>
+        </Method>
+        <Method name="methodStrategy" returnType="double" visibility="public">
+          <Argument type="WeightedGraph&lt;Local, Path&gt;" name="graph"/>
+          <Argument type="Vertex&lt;Local&gt;" name="origin"/>
+          <Argument type="Vertex&lt;Local&gt;" name="destiny"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="path"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="DijkstraDistance" package="Dijkstra" visibility="public" xPosition="1780.0" yPosition="1382.0">
+      <Fields>
+        <Field name="distance" type="double" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="calcDijkstra" returnType="double" visibility="public">
+          <Argument type="WeightedGraph&lt;Local, Path&gt;" name="graph"/>
+          <Argument type="Vertex&lt;Local&gt;" name="origin"/>
+          <Argument type="Vertex&lt;Local&gt;" name="destiny"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="path"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Dijkstra" package="Dijkstra" visibility="public" xPosition="234.0" yPosition="526.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="dijkstra" returnType="void" visibility="private">
+          <Argument type="Criteria" name="criteria"/>
+          <Argument type="Vertex&lt;Local&gt;" name="origin"/>
+          <Argument type="Map&lt;Vertex&lt;Local&gt;, Vertex&lt;Local&gt;&gt;" name="parents"/>
+          <Argument type="Map&lt;Vertex&lt;Local&gt;, Double&gt;" name="costs"/>
+        </Method>
+        <Method name="minimumCostPath" returnType="double" visibility="public">
+          <Argument type="Criteria" name="criteria"/>
+          <Argument type="Vertex&lt;Local&gt;" name="origin"/>
+          <Argument type="Vertex&lt;Local&gt;" name="destination"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="path"/>
+        </Method>
+        <Method name="minimumCost" returnType="Vertex&lt;Local&gt;" visibility="private">
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="missed"/>
+          <Argument type="Map&lt;Vertex&lt;Local&gt;, Double&gt;" name="distances"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="DijkstraCost" package="Dijkstra" visibility="public" xPosition="1765.0" yPosition="526.0">
+      <Fields>
+        <Field name="cost" type="double" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="calcDijkstra" returnType="double" visibility="public">
+          <Argument type="WeightedGraph&lt;Local, Path&gt;" name="graph"/>
+          <Argument type="Vertex&lt;Local&gt;" name="origin"/>
+          <Argument type="Vertex&lt;Local&gt;" name="destiny"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="path"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FrontEndModel" package="JavaFX" visibility="public" xPosition="1374.0" yPosition="2900.0">
+      <Fields>
+        <Field name="pathWay" type="PathManager" visibility="package"/>
+        <Field name="graph" type="WeightedGraph&lt;Local, Path&gt;" visibility="package"/>
+        <Field name="orig" type="Vertex&lt;Local&gt;" visibility="package"/>
+        <Field name="dst" type="Vertex&lt;Local&gt;" visibility="package"/>
+        <Field name="dist" type="double" visibility="package"/>
+        <Field name="context" type="DijkstraContext" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getDistanceCost" returnType="double" visibility="public">
+          <Argument type="int" name="origin"/>
+          <Argument type="int" name="destination"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="path"/>
+          <Argument type="boolean" name="isCost"/>
+        </Method>
+        <Method name="getBetween" returnType="double" visibility="public">
+          <Argument type="Vertex&lt;Local&gt;" name="a"/>
+          <Argument type="Vertex&lt;Local&gt;" name="b"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="path"/>
+          <Argument type="WeightedGraph&lt;Local, Path&gt;" name="graph"/>
+          <Argument type="boolean" name="isCost"/>
+        </Method>
+        <Method name="totalDistanceCost" returnType="double" visibility="public">
+          <Argument type="Vertex&lt;Local&gt;" name="origin"/>
+          <Argument type="Vertex&lt;Local&gt;" name="destiny"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="path"/>
+          <Argument type="boolean" name="isCost"/>
+        </Method>
+        <Method name="localVisited" returnType="Map&lt;String, Integer&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="FrontEndView" package="JavaFX" visibility="public" xPosition="36.0" yPosition="2900.0">
+      <Fields>
+        <Field name="PIN" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="scene" type="Scene" visibility="private" isFinal="true"/>
+        <Field name="scenario" type="StackPane" visibility="private"/>
+        <Field name="styleOff" type="String" visibility="private" isFinal="true"/>
+        <Field name="styleOn" type="String" visibility="private" isFinal="true"/>
+        <Field name="sim" type="ButtonType" visibility="private" isFinal="true"/>
+        <Field name="nao" type="ButtonType" visibility="private" isFinal="true"/>
+        <Field name="rapido" type="ButtonType" visibility="private" isFinal="true"/>
+        <Field name="barato" type="ButtonType" visibility="private" isFinal="true"/>
+        <Field name="cancelar" type="ButtonType" visibility="private" isFinal="true"/>
+        <Field name="buttons" type="List&lt;Button&gt;" visibility="private" isFinal="true"/>
+        <Field name="newPath" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initScenario" returnType="StackPane" visibility="private"/>
+        <Method name="getScene" returnType="Scene" visibility="public"/>
+        <Method name="buttonInit" returnType="void" visibility="public">
+          <Argument type="FrontEndController" name="controller"/>
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+          <Argument type="String" name="text"/>
+        </Method>
+        <Method name="setTriggers" returnType="void" visibility="public">
+          <Argument type="FrontEndController" name="controller"/>
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+        </Method>
+        <Method name="buttonCheck" returnType="void" visibility="private">
+          <Argument type="FrontEndController" name="controller"/>
+          <Argument type="Button" name="btn"/>
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+          <Argument type="int" name="btnNumber"/>
+        </Method>
+        <Method name="buttonHandle" returnType="void" visibility="private">
+          <Argument type="Button" name="btn"/>
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+          <Argument type="int" name="destination"/>
+        </Method>
+        <Method name="createButtons" returnType="Button" visibility="private">
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Method>
+        <Method name="createText" returnType="Text" visibility="private">
+          <Argument type="String" name="txt"/>
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="int" name="fontSize"/>
+        </Method>
+        <Method name="showInfo" returnType="void" visibility="public">
+          <Argument type="FrontEndController" name="controller"/>
+          <Argument type="String" name="destination"/>
+          <Argument type="String" name="resultsDist"/>
+          <Argument type="String" name="resultsCost"/>
+          <Argument type="double" name="Ecost"/>
+          <Argument type="double" name="RCost"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="pathDestDist"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="pathDestCost"/>
+        </Method>
+        <Method name="showChoose" returnType="void" visibility="private">
+          <Argument type="FrontEndController" name="controller"/>
+          <Argument type="String" name="results"/>
+          <Argument type="Alert" name="alert"/>
+          <Argument type="double" name="cost"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="pathDest"/>
+        </Method>
+        <Method name="Dialog" returnType="int" visibility="private">
+          <Argument type="String" name="question"/>
+        </Method>
+        <Method name="Alerts" returnType="Alert" visibility="private">
+          <Argument type="Alert.AlertType" name="type"/>
+          <Argument type="String" name="title"/>
+          <Argument type="String" name="header"/>
+          <Argument type="String" name="content"/>
+        </Method>
+        <Method name="setState" returnType="void" visibility="private">
+          <Argument type="Button" name="btn"/>
+          <Argument type="String" name="style"/>
+          <Argument type="Boolean" name="status"/>
+        </Method>
+        <Method name="alterButtonState" returnType="void" visibility="private">
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+        </Method>
+        <Method name="showStats" returnType="void" visibility="public">
+          <Argument type="FrontEndController" name="controller"/>
+          <Argument type="Map&lt;String, Integer&gt;" name="map"/>
+        </Method>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="Observable" name="o"/>
+          <Argument type="Object" name="arg"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FrontEnd" package="JavaFX" visibility="public" xPosition="856.0" yPosition="1102.0">
+      <Fields>
+        <Field name="model" type="FrontEndModel" visibility="private"/>
+        <Field name="view" type="FrontEndView" visibility="private"/>
+        <Field name="controller" type="FrontEndController" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="start" returnType="void" visibility="public">
+          <Argument type="Stage" name="primaryStage"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FrontEndController" package="JavaFX" visibility="public" xPosition="36.0" yPosition="2299.0">
+      <Fields>
+        <Field name="model" type="FrontEndModel" visibility="private" isFinal="true"/>
+        <Field name="view" type="FrontEndInterface" visibility="private" isFinal="true"/>
+        <Field name="path" type="List&lt;Integer&gt;" visibility="private" isFinal="true"/>
+        <Field name="careTaker" type="CareTaker" visibility="private" isFinal="true"/>
+        <Field name="pathInfo" type="PathInfo" visibility="private" isFinal="true"/>
+        <Field name="persistDao" type="PersistDAOFile" visibility="private" isFinal="true"/>
+        <Field name="statistics" type="Statistics" visibility="private" isFinal="true"/>
+        <Field name="isBike" type="boolean" visibility="private"/>
+        <Field name="isCheap" type="boolean" visibility="private"/>
+        <Field name="log" type="ParkLogs" visibility="private" isFinal="true"/>
+        <Field name="logChoice" type="int" visibility="private"/>
+        <Field name="maps" type="Map&lt;String, Integer&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="FrontEndModel" name="model"/>
+          <Argument type="FrontEndInterface" name="view"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="calc" returnType="void" visibility="private">
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+        </Method>
+        <Method name="calcLast" returnType="void" visibility="public">
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+        </Method>
+        <Method name="calcPath" returnType="void" visibility="public">
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+        </Method>
+        <Method name="getStatistics" returnType="Statistics" visibility="public"/>
+        <Method name="bike" returnType="String" visibility="public">
+          <Argument type="boolean" name="isBike"/>
+        </Method>
+        <Method name="isBike" returnType="boolean" visibility="public"/>
+        <Method name="setIsBike" returnType="void" visibility="public">
+          <Argument type="boolean" name="isBike"/>
+        </Method>
+        <Method name="setLogChoice" returnType="void" visibility="public">
+          <Argument type="int" name="logChoice"/>
+        </Method>
+        <Method name="setIsCheap" returnType="void" visibility="public">
+          <Argument type="boolean" name="isCheap"/>
+        </Method>
+        <Method name="createTicket" returnType="Tickets" visibility="public">
+          <Argument type="int" name="nif"/>
+          <Argument type="String" name="results"/>
+          <Argument type="int" name="num_tickets"/>
+          <Argument type="double" name="cost"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="pathDest"/>
+        </Method>
+        <Method name="updateStats" returnType="void" visibility="private"/>
+        <Method name="showStats" returnType="void" visibility="public"/>
+        <Method name="checkVertex" returnType="Vertex&lt;Local&gt;" visibility="public">
+          <Argument type="int" name="vertex"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public">
+          <Argument type="String" name="type"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="pathDst"/>
+          <Argument type="double" name="calc"/>
+          <Argument type="double" name="otherCalc"/>
+          <Argument type="Dijkstra.Criteria" name="firstCriteria"/>
+          <Argument type="Dijkstra.Criteria" name="secondCriteria"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="GraphEdgeList" package="Graph" visibility="public" xPosition="2040.0" yPosition="787.0">
+      <Fields>
+        <Field name="vertices" type="Map&lt;V, Vertex&lt;V&gt;&gt;" visibility="private" isFinal="true"/>
+        <Field name="edges" type="Map&lt;E, Edge&lt;E, V&gt;&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="numVertices" returnType="int" visibility="public"/>
+        <Method name="numEdges" returnType="int" visibility="public"/>
+        <Method name="vertices" returnType="Iterable&lt;Vertex&lt;V&gt;&gt;" visibility="public"/>
+        <Method name="edges" returnType="Iterable&lt;Edge&lt;E, V&gt;&gt;" visibility="public"/>
+        <Method name="incidentEdges" returnType="Iterable&lt;Edge&lt;E, V&gt;&gt;" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+        </Method>
+        <Method name="checkAlone" returnType="boolean" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+        </Method>
+        <Method name="opposite" returnType="Vertex&lt;V&gt;" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+          <Argument type="Edge&lt;E, V&gt;" name="e"/>
+        </Method>
+        <Method name="areAdjacent" returnType="boolean" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="u"/>
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+        </Method>
+        <Method name="insertVertex" returnType="Vertex&lt;V&gt;" visibility="public">
+          <Argument type="V" name="vElement"/>
+        </Method>
+        <Method name="insertEdge" returnType="Edge&lt;E, V&gt;" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="u"/>
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+          <Argument type="E" name="edgeElement"/>
+        </Method>
+        <Method name="insertEdge" returnType="Edge&lt;E, V&gt;" visibility="public">
+          <Argument type="V" name="vElement1"/>
+          <Argument type="V" name="vElement2"/>
+          <Argument type="E" name="edgeElement"/>
+        </Method>
+        <Method name="removeVertex" returnType="V" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+        </Method>
+        <Method name="removeEdge" returnType="E" visibility="public">
+          <Argument type="Edge&lt;E, V&gt;" name="e"/>
+        </Method>
+        <Method name="replace" returnType="V" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+          <Argument type="V" name="newElement"/>
+        </Method>
+        <Method name="replace" returnType="E" visibility="public">
+          <Argument type="Edge&lt;E, V&gt;" name="e"/>
+          <Argument type="E" name="newElement"/>
+        </Method>
+        <Method name="vertexOf" returnType="MyVertex" visibility="private">
+          <Argument type="V" name="vElement"/>
+        </Method>
+        <Method name="existsVertexWith" returnType="boolean" visibility="private">
+          <Argument type="V" name="vElement"/>
+        </Method>
+        <Method name="existsEdgeWith" returnType="boolean" visibility="private">
+          <Argument type="E" name="edgeElement"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="checkVertex" returnType="MyVertex" visibility="private">
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+        </Method>
+        <Method name="checkEdge" returnType="MyEdge" visibility="private">
+          <Argument type="Edge&lt;E, V&gt;" name="e"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="InvalidVertexException" package="Graph" visibility="public" xPosition="2250.0" yPosition="1653.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="msg"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="InvalidEdgeException" package="Graph" visibility="public" xPosition="2250.0" yPosition="1538.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="msg"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Main" package="" visibility="public" xPosition="160.0" yPosition="194.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ParkLogs" package="Logger" visibility="public" xPosition="2209.0" yPosition="1901.0">
+      <Fields>
+        <Field name="logger" type="ParkLogs" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="writeToLog" returnType="void" visibility="public">
+          <Argument type="String" name="msg"/>
+        </Method>
+        <Method name="getInstance" returnType="ParkLogs" visibility="public" isStatic="true"/>
+        <Method name="getPrefix" returnType="String" visibility="private">
+          <Argument type="Calendar" name="cal"/>
+        </Method>
+        <Method name="getMessage" returnType="String" visibility="private">
+          <Argument type="String" name="msg"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="PersistDAO" package="PersistDAO" visibility="public" xPosition="2119.0" yPosition="163.0">
+      <Methods>
+        <Method name="selectTickets" returnType="Collection&lt;Tickets&gt;" visibility="package"/>
+        <Method name="selectStats" returnType="Collection&lt;Statistics&gt;" visibility="package"/>
+        <Method name="insert" returnType="void" visibility="public">
+          <Argument type="Tickets" name="ticket"/>
+          <Argument type="Statistics" name="statistics"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="WeightedGraph" package="Manager" visibility="public" xPosition="1814.0" yPosition="341.0">
+      <Methods>
+        <Method name="minimumCostPath" returnType="double" visibility="public">
+          <Argument type="Criteria" name="criteria"/>
+          <Argument type="Vertex&lt;Local&gt;" name="origin"/>
+          <Argument type="Vertex&lt;Local&gt;" name="destination"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="path"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="Weighted" package="Manager" visibility="public" xPosition="234.0" yPosition="1473.0">
+      <Methods>
+        <Method name="getCost" returnType="double" visibility="package"/>
+        <Method name="getDistance" returnType="double" visibility="package"/>
+        <Method name="isCrossable" returnType="boolean" visibility="package"/>
+      </Methods>
+    </Interface>
+    <Interface name="DijkstraStrategy" package="Dijkstra" visibility="public" xPosition="-22.0" yPosition="19.0">
+      <Methods>
+        <Method name="calcDijkstra" returnType="double" visibility="public">
+          <Argument type="WeightedGraph&lt;Local, Path&gt;" name="graph"/>
+          <Argument type="Vertex&lt;Local&gt;" name="origin"/>
+          <Argument type="Vertex&lt;Local&gt;" name="destiny"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="path"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="FrontEndInterface" package="JavaFX" visibility="public" xPosition="1374.0" yPosition="2586.0">
+      <Methods>
+        <Method name="getScene" returnType="Scene" visibility="public"/>
+        <Method name="buttonInit" returnType="void" visibility="public">
+          <Argument type="FrontEndController" name="controller"/>
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+          <Argument type="String" name="text"/>
+        </Method>
+        <Method name="setTriggers" returnType="void" visibility="public">
+          <Argument type="FrontEndController" name="controller"/>
+          <Argument type="List&lt;Integer&gt;" name="path"/>
+        </Method>
+        <Method name="showInfo" returnType="void" visibility="public">
+          <Argument type="FrontEndController" name="controller"/>
+          <Argument type="String" name="destination"/>
+          <Argument type="String" name="resultsDist"/>
+          <Argument type="String" name="resultCost"/>
+          <Argument type="double" name="Ecost"/>
+          <Argument type="double" name="RCost"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="pathDestDist"/>
+          <Argument type="List&lt;Vertex&lt;Local&gt;&gt;" name="pathDestCost"/>
+        </Method>
+        <Method name="showStats" returnType="void" visibility="public">
+          <Argument type="FrontEndController" name="controller"/>
+          <Argument type="Map&lt;String, Integer&gt;" name="map"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="Graph" package="Graph" visibility="public" xPosition="56.0" yPosition="1634.0">
+      <Methods>
+        <Method name="numVertices" returnType="int" visibility="public"/>
+        <Method name="numEdges" returnType="int" visibility="public"/>
+        <Method name="vertices" returnType="Iterable&lt;Vertex&lt;V&gt;&gt;" visibility="public"/>
+        <Method name="edges" returnType="Iterable&lt;Edge&lt;E, V&gt;&gt;" visibility="public"/>
+        <Method name="incidentEdges" returnType="Iterable&lt;Edge&lt;E, V&gt;&gt;" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+        </Method>
+        <Method name="checkAlone" returnType="boolean" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+        </Method>
+        <Method name="opposite" returnType="Vertex&lt;V&gt;" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+          <Argument type="Edge&lt;E, V&gt;" name="e"/>
+        </Method>
+        <Method name="areAdjacent" returnType="boolean" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="u"/>
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+        </Method>
+        <Method name="insertVertex" returnType="Vertex&lt;V&gt;" visibility="public">
+          <Argument type="V" name="vElement"/>
+        </Method>
+        <Method name="insertEdge" returnType="Edge&lt;E, V&gt;" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="u"/>
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+          <Argument type="E" name="edgeElement"/>
+        </Method>
+        <Method name="insertEdge" returnType="Edge&lt;E, V&gt;" visibility="public">
+          <Argument type="V" name="vElement1"/>
+          <Argument type="V" name="vElement2"/>
+          <Argument type="E" name="edgeElement"/>
+        </Method>
+        <Method name="removeVertex" returnType="V" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+        </Method>
+        <Method name="removeEdge" returnType="E" visibility="public">
+          <Argument type="Edge&lt;E, V&gt;" name="e"/>
+        </Method>
+        <Method name="replace" returnType="V" visibility="public">
+          <Argument type="Vertex&lt;V&gt;" name="v"/>
+          <Argument type="V" name="newElement"/>
+        </Method>
+        <Method name="replace" returnType="E" visibility="public">
+          <Argument type="Edge&lt;E, V&gt;" name="e"/>
+          <Argument type="E" name="newElement"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="Vertex" package="Graph" visibility="public" xPosition="115.0" yPosition="834.0">
+      <Methods>
+        <Method name="element" returnType="V" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="Edge" package="Graph" visibility="public" xPosition="1044.0" yPosition="2586.0">
+      <Methods>
+        <Method name="element" returnType="E" visibility="public"/>
+        <Method name="vertices" returnType="Vertex&lt;V&gt;[]" visibility="public"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Dijkstra.DijkstraCost" target="Dijkstra.DijkstraStrategy"/>
+    <HasRelation name="statistics" source="JavaFX.FrontEndController" target="Manager.Statistics" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Manager.PathManager" target="Manager.Local" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="JavaFX.FrontEndView" target="JavaFX.FrontEndInterface"/>
+    <HasRelation name="persistDao" source="JavaFX.FrontEndController" target="PersistDAO.PersistDAOFile" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="graph" source="JavaFX.FrontEndModel" target="Manager.Path" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="model" source="JavaFX.FrontEndController" target="JavaFX.FrontEndModel" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="JavaFX.FrontEndView" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Manager.PathManager" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Dijkstra.Dijkstra" target="Graph.GraphEdgeList"/>
+    <HasRelation name="orig" source="JavaFX.FrontEndModel" target="Manager.Local" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Graph.GraphEdgeList" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="PersistDAO.PersistDAO" target="Manager.Statistics" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="view" source="JavaFX.FrontEnd" target="JavaFX.FrontEndView" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="view" source="JavaFX.FrontEndController" target="JavaFX.FrontEndInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Manager.WeightedGraph" target="Graph.Graph"/>
+    <IsRelation name="is" source="Template.TicketPDF" target="Template.TicketInvoice"/>
+    <UseRelation source="Graph.Graph" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Dijkstra.Dijkstra" target="Manager.WeightedGraph"/>
+    <HasRelation name="log" source="JavaFX.FrontEndController" target="Logger.ParkLogs" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Dijkstra.DijkstraDistance" target="Dijkstra.DijkstraStrategy"/>
+    <UseRelation source="Dijkstra.DijkstraStrategy" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="JavaFX.FrontEndView" target="JavaFX.FrontEndController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="model" source="JavaFX.FrontEnd" target="JavaFX.FrontEndModel" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Graph.Edge" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="PersistDAO.PersistDAOFile" target="Manager.Statistics" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ticket" source="Template.TicketInvoice" target="Manager.Tickets" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="JavaFX.FrontEndController" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dijkstra.DijkstraContext" target="Dijkstra.DijkstraStrategy" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="PersistDAO.PersistDAOMySql" target="Manager.Tickets" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dijkstra.DijkstraCost" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Manager.PathManager" target="Manager.Path" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="context" source="JavaFX.FrontEndModel" target="Dijkstra.DijkstraContext" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="JavaFX.FrontEndInterface" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="JavaFX.FrontEndModel" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="PersistDAO.PersistDAOFile" target="PersistDAO.PersistDAO"/>
+    <HasRelation name="stats" source="PersistDAO.PersistDAOFile" target="Manager.Statistics" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="HashSet&lt;Statistics&gt;"/>
+    <HasRelation name="logger" source="Logger.ParkLogs" target="Logger.ParkLogs" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="graph" source="Manager.PathManager" target="Manager.Path" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Template.InvoicePDF" target="Template.TicketInvoice"/>
+    <UseRelation source="JavaFX.FrontEndController" target="Manager.Statistics" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Graph.Graph" target="Graph.Edge" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dijkstra.DijkstraDistance" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="careTaker" source="JavaFX.FrontEndController" target="Memento.CareTaker" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dijkstra.DijkstraContext" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Graph.GraphEdgeList" target="Graph.Graph"/>
+    <HasRelation name="pathWay" source="JavaFX.FrontEndModel" target="Manager.PathManager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Memento.PathInfo" target="Memento.Memento" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tickets" source="PersistDAO.PersistDAOFile" target="Manager.Tickets" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="HashSet&lt;Tickets&gt;"/>
+    <HasRelation name="strategy" source="Dijkstra.DijkstraContext" target="Dijkstra.DijkstraStrategy" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="PersistDAO.PersistDAO" target="Manager.Tickets" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="objMementos" source="Memento.CareTaker" target="Memento.Memento" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Manager.PathManager" target="Graph.Graph" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="PersistDAO.PersistDAOMySql" target="Manager.Statistics" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Dijkstra.Dijkstra" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="PersistDAO.PersistDAOFile" target="Manager.Tickets" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Graph.GraphEdgeList" target="Graph.Edge" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Logger.ParkLogs" target="Logger.ParkLogs" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="pathInfo" source="JavaFX.FrontEndController" target="Memento.PathInfo" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="JavaFX.FrontEndInterface" target="JavaFX.FrontEndController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="PersistDAO.PersistDAOMySql" target="PersistDAO.PersistDAO"/>
+    <UseRelation source="Memento.CareTaker" target="Manager.Path" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="controller" source="JavaFX.FrontEnd" target="JavaFX.FrontEndController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Manager.WeightedGraph" target="Graph.Vertex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dst" source="JavaFX.FrontEndModel" target="Manager.Local" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Manager.Path" target="Manager.Weighted"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

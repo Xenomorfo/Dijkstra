@@ -1,0 +1,24 @@
+8
+1, Entrada
+2, Barco
+3, Montanha
+4, Comboio
+5, Carrocel
+6, Castelo
+7, Rio
+8, Elefantes
+14
+1, caminho, alameda, 1, 2, true, 350, 20
+2, caminho, quinta, 3, 6, false, 5, 20
+3, caminho, rosas, 5, 8, true, 5, 50
+4, caminho, florido, 2, 5, true, 20, 200
+5, ponte, silvestre, 2, 6, false, 50, 500
+6, caminho, direita, 4, 5, true, 100, 10
+7, ponte, escuro, 3, 7, true, 25, 400
+8, caminho, ruidoso, 8, 7, true, 25, 250
+9, caminho, melodia, 1, 8, true, 5, 50
+10, ponte, meio_parque, 3, 4, false, 55, 600
+11, caminho, passeio, 7, 1, true, 10, 100
+12, ponte, bungalows, 3, 1, true, 30, 350
+13, caminho, shortway, 2, 4, true, 5, 50
+14, caminho, longway, 4, 6, true, 45, 500

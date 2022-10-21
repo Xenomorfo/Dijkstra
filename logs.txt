@@ -1,0 +1,14 @@
+
+Evento - Fri Mar 01 08:09:50 GMT 2019 : Bilhete criado - Quantidade - 1 Contribuinte - 243213213
+
+Evento - Fri Oct 21 17:23:23 WEST 2022 : Bilhete criado - Quantidade - 1 Contribuinte - 220686050
+
+Evento - Fri Oct 21 17:25:48 WEST 2022 : Bilhete criado - Quantidade - 1 Contribuinte - 220686050
+
+Evento - Fri Oct 21 17:26:46 WEST 2022 : Bilhete criado - Quantidade - 2 Contribuinte - 220686050
+
+Evento - Fri Oct 21 17:29:13 WEST 2022 : Bilhete criado - Quantidade - 1 Contribuinte - 0
+
+Evento - Fri Oct 21 17:30:53 WEST 2022 : Bilhete criado - Quantidade - 1 Contribuinte - 0
+
+Evento - Fri Oct 21 17:31:19 WEST 2022 : Bilhete criado - Quantidade - 1 Contribuinte - 220686050
